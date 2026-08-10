@@ -3,6 +3,8 @@ import { createDeckNodeMap } from "../lib/deck-tree";
 import { Card } from "../types/cards";
 import { DeckNode } from "../types/decks";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 interface DeckContextValue {
   deckTree: DeckNode | null;
   deckNodes: DeckNode[] | null;
@@ -33,7 +35,7 @@ async function fetchDeckTree(): Promise<DeckNode> {
   }
 
   if (!deckTreePromise) {
-    deckTreePromise = fetchJson<DeckNode>("/decks/index.json")
+    deckTreePromise = fetchJson<DeckNode>(`${BASE_PATH}/decks/index.json`)
       .then((response) => {
         cachedDeckTree = response;
         return response;
@@ -58,7 +60,7 @@ async function fetchDeck(deckId: string): Promise<Card[]> {
     return existingPromise;
   }
 
-  const nextPromise = fetchJson<Card[]>(`/decks/${deckId}.json`)
+  const nextPromise = fetchJson<Card[]>(`${BASE_PATH}/decks/${deckId}.json`)
     .then((response) => {
       const loadedDeck = response as Card[];
       cachedDecks.set(deckId, loadedDeck);
