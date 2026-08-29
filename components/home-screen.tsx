@@ -27,7 +27,7 @@ export default function HomeScreen() {
                 aria-hidden="true"
                 className={styles.pinstinctIcon}
                 height={20}
-                src="/pinstinct-favicon.svg"
+                src="pinstinct-favicon.svg"
                 width={20}
               />
               <span>Try Pinstinct, my new daily map game.</span>
