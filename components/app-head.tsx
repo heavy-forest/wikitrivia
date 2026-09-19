@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { publicPath } from "../lib/public-path";
 
 interface Props {
   title?: string;
@@ -12,38 +13,47 @@ export default function AppHead(props: Props) {
       <title>{title}</title>
       <link
         rel="preload"
-        href="/fonts/inter-latin.woff2"
+        href={publicPath("fonts/inter-latin.woff2")}
         as="font"
         type="font/woff2"
         crossOrigin="anonymous"
       />
       <link
         rel="preload"
-        href="/fonts/fraunces-latin.woff2"
+        href={publicPath("fonts/fraunces-latin.woff2")}
         as="font"
         type="font/woff2"
         crossOrigin="anonymous"
       />
-      <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
       <link
         rel="icon"
-        href="/favicon-light.png"
+        href={publicPath("favicon.svg")}
+        sizes="any"
+        type="image/svg+xml"
+      />
+      <link
+        rel="icon"
+        href={publicPath("favicon-light.png")}
         media="(prefers-color-scheme: light)"
         type="image/png"
       />
       <link
         rel="icon"
-        href="/favicon-dark.png"
+        href={publicPath("favicon-dark.png")}
         media="(prefers-color-scheme: dark)"
         type="image/png"
       />
-      <link rel="icon" href="/favicon-light.png" type="image/png" />
+      <link
+        rel="icon"
+        href={publicPath("favicon-light.png")}
+        type="image/png"
+      />
       <link
         rel="apple-touch-icon"
-        href="/apple-touch-icon.png"
+        href={publicPath("apple-touch-icon.png")}
         sizes="180x180"
       />
-      <link rel="manifest" href="/manifest.webmanifest" />
+      <link rel="manifest" href={publicPath("manifest.webmanifest")} />
       <meta name="application-name" content="Wikitrivia" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />

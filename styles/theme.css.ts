@@ -5,6 +5,7 @@ import {
   globalStyle,
   style,
 } from "@vanilla-extract/css";
+import { publicPath } from "../lib/public-path";
 import {
   breakpointScale,
   durationScale,
@@ -174,14 +175,14 @@ globalFontFace("Inter", {
   fontDisplay: "swap",
   fontStyle: "normal",
   fontWeight: "400 800",
-  src: 'url("/fonts/inter-latin.woff2") format("woff2")',
+  src: `url("${publicPath("fonts/inter-latin.woff2")}") format("woff2")`,
 });
 
 globalFontFace("Fraunces", {
   fontDisplay: "swap",
   fontStyle: "normal",
   fontWeight: "700 800",
-  src: 'url("/fonts/fraunces-latin.woff2") format("woff2")',
+  src: `url("${publicPath("fonts/fraunces-latin.woff2")}") format("woff2")`,
 });
 
 export const appThemeClass = style({
