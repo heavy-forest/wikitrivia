@@ -1,3 +1,4 @@
+import { getScoreRank } from "../lib/score-rank";
 import * as styles from "../styles/score.css";
 
 interface Props {
@@ -7,22 +8,10 @@ interface Props {
 
 export default function Score(props: Props) {
   const { score, title } = props;
-  let tone = "none";
-  let rankLabel = "None";
-
-  if (score >= 20) {
-    tone = "gold";
-    rankLabel = "Gold";
-  } else if (score >= 10) {
-    tone = "silver";
-    rankLabel = "Silver";
-  } else if (score >= 1) {
-    tone = "bronze";
-    rankLabel = "Bronze";
-  }
+  const rank = getScoreRank(score);
 
   return (
-    <div className={styles.score} data-tone={tone}>
+    <div className={styles.score} data-tone={rank.tone}>
       <span className={styles.segment}>{title}</span>
       <span aria-hidden="true" className={styles.separator}>
         /
@@ -31,7 +20,7 @@ export default function Score(props: Props) {
       <span aria-hidden="true" className={styles.separator}>
         /
       </span>
-      <span className={styles.segment}>{rankLabel}</span>
+      <span className={styles.segment}>{rank.label}</span>
     </div>
   );
 }

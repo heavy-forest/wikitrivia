@@ -2,6 +2,8 @@ import { PlayedCard } from "../types/cards";
 import { GameDifficulty } from "../types/game";
 import { GameMode, SelectionRoute } from "../types/routes";
 import { getSelectionRouteShareLabel } from "./categories";
+import { getRankLabel } from "./score-rank";
+export { getRankLabel } from "./score-rank";
 const PRODUCTION_ORIGIN = "https://wikitrivia.tomjwatson.com";
 const SHARE_BRAND_LABEL = "#wikitrivia";
 const SHARE_RESULT_CORRECT = "🟩";
@@ -48,22 +50,6 @@ export function getShareResults(played: PlayedCard[]): boolean[] {
       return left.placementIndex - right.placementIndex;
     })
     .map(({ item }) => item.played.correct);
-}
-
-export function getRankLabel(score: number): string {
-  if (score >= 20) {
-    return "Gold";
-  }
-
-  if (score >= 10) {
-    return "Silver";
-  }
-
-  if (score >= 1) {
-    return "Bronze";
-  }
-
-  return "None";
 }
 
 function buildResultRow(results?: boolean[]): string | null {

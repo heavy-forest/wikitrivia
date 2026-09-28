@@ -24,6 +24,21 @@ export const score = style([
         borderColor: vars.color.medalGoldBorder,
         color: vars.color.medalGoldText,
       },
+      '&[data-tone="platinum"]': {
+        background: vars.color.medalPlatinumFill,
+        borderColor: vars.color.medalPlatinumBorder,
+        color: vars.color.medalPlatinumText,
+      },
+      '&[data-tone="emerald"]': {
+        background: vars.color.medalEmeraldFill,
+        borderColor: vars.color.medalEmeraldBorder,
+        color: vars.color.medalEmeraldText,
+      },
+      '&[data-tone="diamond"]': {
+        background: vars.color.medalDiamondFill,
+        borderColor: vars.color.medalDiamondBorder,
+        color: vars.color.medalDiamondText,
+      },
     },
   },
 ]);

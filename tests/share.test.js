@@ -50,9 +50,31 @@ test("free play share text includes category, difficulty, score, and best", () =
       "🟩🟥🟩🟩🟩🟥🟩🟩",
       "",
       "Score / 6 / Bronze",
-      "Best / 25 / Gold",
+      "Best / 25 / Platinum",
       "",
       "https://wikitrivia.tomjwatson.com/play/history/wars",
+    ].join("\n"),
+  );
+});
+
+test("share text uses the highest score ranks", () => {
+  const shareText = buildShareText({
+    difficulty: "hard",
+    highscore: 35,
+    mode: "free-play",
+    path: "/play/everything",
+    score: 30,
+  });
+
+  assert.equal(
+    shareText,
+    [
+      "#wikitrivia / Hard",
+      "",
+      "Score / 30 / Emerald",
+      "Best / 35 / Diamond",
+      "",
+      "https://wikitrivia.tomjwatson.com/play/everything",
     ].join("\n"),
   );
 });
