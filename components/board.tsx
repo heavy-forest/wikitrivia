@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { AnimatePresence, motion } from "motion/react";
 import React from "react";
-import { announce } from "../lib/events";
 import {
   checkCorrect,
   drawNextCard,
@@ -654,71 +653,6 @@ export default function Board(props: Props) {
       updateHighscore(score);
     }
   }, [score, highscore, updateHighscore]);
-
-  const isOver = state.lives <= 0 || isDeckExhausted;
-  const startAnnounced = React.useRef(restoredFromSnapshot);
-  const finishAnnounced = React.useRef(restoredFromSnapshot && isOver);
-
-  React.useEffect(() => {
-    if (startAnnounced.current) {
-      return;
-    }
-
-    startAnnounced.current = true;
-    announce({
-      type: "start",
-      mode: gameMode,
-      day: dailyDateKey,
-      detail: selectionRoute?.nodeId,
-    });
-  }, [dailyDateKey, gameMode, selectionRoute]);
-
-  React.useEffect(() => {
-    if (!isOver || finishAnnounced.current) {
-      return;
-    }
-
-    finishAnnounced.current = true;
-    announce({
-      type: "finish",
-      mode: gameMode,
-      day: dailyDateKey,
-      score,
-      detail: selectionRoute?.nodeId,
-    });
-  }, [dailyDateKey, gameMode, isOver, score, selectionRoute]);
-
-  const placed = state.played.length - 1;
-  const progress = React.useRef({ isOver, placed, left: false });
-  React.useEffect(() => {
-    progress.current.isOver = isOver;
-    progress.current.placed = placed;
-  }, [isOver, placed]);
-
-  React.useEffect(() => {
-    const onHidden = () => {
-      const current = progress.current;
-      if (document.visibilityState !== "hidden") {
-        return;
-      }
-      if (current.isOver || current.left || current.placed < 1) {
-        return;
-      }
-
-      current.left = true;
-      announce({
-        type: "leave",
-        mode: gameMode,
-        day: dailyDateKey,
-        progress: current.placed,
-      });
-    };
-
-    document.addEventListener("visibilitychange", onHidden);
-    return () => {
-      document.removeEventListener("visibilitychange", onHidden);
-    };
-  }, [dailyDateKey, gameMode]);
 
   return (
     <div ref={boardRef} className={styles.wrapper}>

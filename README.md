@@ -68,4 +68,4 @@ If the underlying Wikidata item is wrong, fix it directly on Wikidata. It will t
 
 ### Does Wikitrivia track me?
 
-The hosted game counts plays, finishes and shares anonymously, with no cookies, accounts or advertising trackers. See the [privacy page](https://wikitrivia.tomjwatson.com/privacy) for details.
+This fork does not collect telemetry. The [original hosted game](https://wikitrivia.tomjwatson.com/privacy) collects some analytics. Your browser stores progress and preferences locally and requests images from Wikimedia.
