@@ -2,6 +2,7 @@ import { PlayedCard } from "../types/cards";
 import { GameDifficulty } from "../types/game";
 import { GameMode, SelectionRoute } from "../types/routes";
 import { getSelectionRouteShareLabel } from "./categories";
+import { publicPath } from "./public-path";
 import { getRankLabel } from "./score-rank";
 export { getRankLabel } from "./score-rank";
 const PRODUCTION_ORIGIN = "https://wikitrivia.tomjwatson.com";
@@ -37,7 +38,13 @@ function getShareOrigin(): string {
 }
 
 export function buildShareUrl(path: string): string {
-  return `${getShareOrigin()}${path}`;
+  const origin = getShareOrigin();
+  const isLocal =
+    typeof window === "undefined" ||
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1";
+  const sharePath = isLocal ? path : publicPath(path);
+  return `${origin}${sharePath}?s=1`;
 }
 
 export function getShareResults(played: PlayedCard[]): boolean[] {
